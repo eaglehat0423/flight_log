@@ -17,28 +17,28 @@
     </div>
     <div class="form-group">
       <label for="country-select">Departure Country</label>
-      <select id="country-select" class="form-control">
+      <select id="country-select" class="form-control select2">
         <option value="">-- Select Country --</option>
       </select>
     </div>
 
     <div class="form-group">
       <label for="id_departure">Departure (Airport Code)</label>
-      <select name="departure" id="id_departure" class="form-control">
+      <select name="departure" id="id_departure" class="form-control select2">
         <option value="">-- Select Airport --</option>
       </select>
     </div>
 
     <div class="form-group mt-3">
         <label for="arrival-country-select">Arrival Country</label>
-        <select id="arrival-country-select" class="form-control">
+        <select id="arrival-country-select" class="form-control select2">
             <option value="">-- Select Country --</option>
         </select>
     </div>
 
     <div class="form-group">
         <label for="id_arrival">Arrival (Airport Code)</label>
-        <select name="arrival" id="id_arrival" class="form-control">
+        <select name="arrival" id="id_arrival" class="form-control select2">
             <option value="">-- Select Airport --</option>
         </select>
     </div>
@@ -46,7 +46,7 @@
 
     <div class="form-group">
       <label for="id_aircraft_type">Aircraft Type</label>
-      <select name="aircraft_type" id="id_aircraft_type" class="form-control">
+      <select name="aircraft_type" id="id_aircraft_type" class="form-control select2">
         <option value="">-- Select Aircraft Type --</option>
       </select>
     </div>
@@ -77,66 +77,66 @@
 </div>
 
 <script src="{% static 'js/airports.js' %}"></script>
+<script src="{% static 'js/aircraft_types.js' %}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    const airportData = window.airportData;
+        const airportData = window.airportData;
 
-    const countrySelect = document.getElementById('country-select');
-    const airportSelect = document.getElementById('id_departure');
+        const countrySelect = $('#country-select');
+        const airportSelect = $('#id_departure');
 
-    const arrivalCountrySelect = document.getElementById('arrival-country-select');
-    const arrivalAirportSelect = document.getElementById('id_arrival');
+        const arrivalCountrySelect = $('#arrival-country-select');
+        const arrivalAirportSelect = $('#id_arrival');
 
-    // 出発：国リストを生成
-    for (const country in airportData) {
-        const option1 = document.createElement('option');
-        option1.value = country;
-        option1.textContent = country;
-        countrySelect.appendChild(option1);
+        const aircraftSelect = $('#id_aircraft_type');
 
-        const option2 = option1.cloneNode(true);
-        arrivalCountrySelect.appendChild(option2);
-    }
-
-    // 出発：空港リスト更新
-    countrySelect.addEventListener('change', function () {
-        const selectedCountry = this.value;
-        airportSelect.innerHTML = '<option value="">-- Select Airport --</option>';
-        if (selectedCountry && airportData[selectedCountry]) {
-        airportData[selectedCountry].forEach(code => {
-            const opt = document.createElement('option');
-            opt.value = code;
-            opt.textContent = code;
-            airportSelect.appendChild(opt);
+        // Select2 初期化
+        $('.select2').select2({
+            width: '100%',
+            placeholder: '-- Select an option --',
+            allowClear: true
         });
+
+        // 出発：国リスト生成
+        for (const country in airportData) {
+            const option = new Option(country, country);
+            countrySelect.append(option.cloneNode(true));
+            arrivalCountrySelect.append(option.cloneNode(true));
         }
-    });
 
-    // 到着：空港リスト更新
-    arrivalCountrySelect.addEventListener('change', function () {
-        const selectedCountry = this.value;
-        arrivalAirportSelect.innerHTML = '<option value="">-- Select Airport --</option>';
-        if (selectedCountry && airportData[selectedCountry]) {
-        airportData[selectedCountry].forEach(code => {
-            const opt = document.createElement('option');
-            opt.value = code;
-            opt.textContent = code;
-            arrivalAirportSelect.appendChild(opt);
+        // 出発：空港リスト更新
+        countrySelect.on('change', function () {
+            const selectedCountry = $(this).val();
+            airportSelect.empty().append(new Option('-- Select Airport --', ''));
+            if (selectedCountry && airportData[selectedCountry]) {
+                airportData[selectedCountry].forEach(code => {
+                    airportSelect.append(new Option(code, code));
+                });
+            }
+            airportSelect.trigger('change'); // Select2に通知
         });
+
+        // 到着：空港リスト更新
+        arrivalCountrySelect.on('change', function () {
+            const selectedCountry = $(this).val();
+            arrivalAirportSelect.empty().append(new Option('-- Select Airport --', ''));
+            if (selectedCountry && airportData[selectedCountry]) {
+                airportData[selectedCountry].forEach(code => {
+                    arrivalAirportSelect.append(new Option(code, code));
+                });
+            }
+            arrivalAirportSelect.trigger('change'); // Select2に通知
+        });
+
+        // 機種リスト追加
+        if (window.aircraftTypes) {
+            for (const [key, value] of Object.entries(window.aircraftTypes)) {
+                aircraftSelect.append(new Option(value, key));
+            }
+            aircraftSelect.trigger('change'); // Select2に通知
+        } else {
+            console.warn("aircraftTypes not loaded.");
         }
-    });
-
-     // Aircraft Type ドロップダウン
-    fetch("{% static 'js/aircraft_types.json' %}")
-    .then(response => response.json())
-    .then(data => {
-        const aircraftSelect = document.getElementById('id_aircraft_type');
-        data.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.icao;
-        option.textContent = `${item.description} (${item.icao}${item.iata ? '/' + item.iata : ''})`;
-        aircraftSelect.appendChild(option);
-        });
     });
 
     
