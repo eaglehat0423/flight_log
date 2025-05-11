@@ -1,0 +1,145 @@
+
+
+{% extends 'base.html' %}
+
+{% load custom_filters %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Add Flight Log</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_date">Date</label>
+      {{ form.date|add_class:"form-control" }}
+    </div>
+    <div class="form-group">
+      <label for="country-select">Departure Country</label>
+      <select id="country-select" class="form-control">
+        <option value="">-- Select Country --</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="id_departure">Departure (Airport Code)</label>
+      <select name="departure" id="id_departure" class="form-control">
+        <option value="">-- Select Airport --</option>
+      </select>
+    </div>
+
+    <div class="form-group mt-3">
+        <label for="arrival-country-select">Arrival Country</label>
+        <select id="arrival-country-select" class="form-control">
+            <option value="">-- Select Country --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="id_arrival">Arrival (Airport Code)</label>
+        <select name="arrival" id="id_arrival" class="form-control">
+            <option value="">-- Select Airport --</option>
+        </select>
+    </div>
+
+
+    <div class="form-group">
+      <label for="id_aircraft_type">Aircraft Type</label>
+      <select name="aircraft_type" id="id_aircraft_type" class="form-control">
+        <option value="">-- Select Aircraft Type --</option>
+      </select>
+    </div>
+
+
+    <div class="form-group">
+      <label for="id_aircraft_reg">Aircraft Registration</label>
+      {{ form.aircraft_reg|add_class:"form-control" }}
+    </div>
+    <div class="form-group">
+      <label for="id_flight_time">Flight Time</label>
+      {{ form.flight_time|add_class:"form-control" }}
+    </div>
+    <div class="form-group">
+      <label for="id_flight_type">Flight Type</label>
+      {{ form.flight_type|add_class:"form-control" }}
+    </div>
+    <div class="form-group">
+      <label for="id_notes">Notes</label>
+      {{ form.notes|add_class:"form-control" }}
+    </div>
+    <div class="form-group">
+      <label for="id_image">Image</label>
+      {{ form.image|add_class:"form-control" }}
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Save</button>
+  </form>
+</div>
+
+<script src="{% static 'js/airports.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const airportData = window.airportData;
+
+    const countrySelect = document.getElementById('country-select');
+    const airportSelect = document.getElementById('id_departure');
+
+    const arrivalCountrySelect = document.getElementById('arrival-country-select');
+    const arrivalAirportSelect = document.getElementById('id_arrival');
+
+    // 出発：国リストを生成
+    for (const country in airportData) {
+        const option1 = document.createElement('option');
+        option1.value = country;
+        option1.textContent = country;
+        countrySelect.appendChild(option1);
+
+        const option2 = option1.cloneNode(true);
+        arrivalCountrySelect.appendChild(option2);
+    }
+
+    // 出発：空港リスト更新
+    countrySelect.addEventListener('change', function () {
+        const selectedCountry = this.value;
+        airportSelect.innerHTML = '<option value="">-- Select Airport --</option>';
+        if (selectedCountry && airportData[selectedCountry]) {
+        airportData[selectedCountry].forEach(code => {
+            const opt = document.createElement('option');
+            opt.value = code;
+            opt.textContent = code;
+            airportSelect.appendChild(opt);
+        });
+        }
+    });
+
+    // 到着：空港リスト更新
+    arrivalCountrySelect.addEventListener('change', function () {
+        const selectedCountry = this.value;
+        arrivalAirportSelect.innerHTML = '<option value="">-- Select Airport --</option>';
+        if (selectedCountry && airportData[selectedCountry]) {
+        airportData[selectedCountry].forEach(code => {
+            const opt = document.createElement('option');
+            opt.value = code;
+            opt.textContent = code;
+            arrivalAirportSelect.appendChild(opt);
+        });
+        }
+    });
+
+     // Aircraft Type ドロップダウン
+    fetch("{% static 'js/aircraft_types.json' %}")
+    .then(response => response.json())
+    .then(data => {
+        const aircraftSelect = document.getElementById('id_aircraft_type');
+        data.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.icao;
+        option.textContent = `${item.description} (${item.icao}${item.iata ? '/' + item.iata : ''})`;
+        aircraftSelect.appendChild(option);
+        });
+    });
+
+    
+</script>
+
+{% endblock %}

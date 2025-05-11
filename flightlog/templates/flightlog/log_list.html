@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Flight Logs</h2>
+<a href="{% url 'add_log' %}">Add New Flight</a>
+<table>
+  <tr>
+    <th>Date</th><th>From</th><th>To</th><th>Type</th><th>Time</th>
+  </tr>
+  {% for log in logs %}
+  <tr>
+    <td>{{ log.date }}</td>
+    <td>{{ log.departure }}</td>
+    <td>{{ log.arrival }}</td>
+    <td>{{ log.flight_type }}</td>
+    <td>{{ log.flight_time }}h</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
