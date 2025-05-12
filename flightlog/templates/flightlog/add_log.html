@@ -130,8 +130,8 @@
 
         // 機種リスト追加
         if (window.aircraftTypes) {
-            for (const [key, value] of Object.entries(window.aircraftTypes)) {
-                aircraftSelect.append(new Option(value, key));
+            for (let i = 0; i < window.aircraftTypes.length; i++) {
+                aircraftSelect.append(new Option(window.aircraftTypes[i]["description"],window.aircraftTypes[i]["icao"]));
             }
             aircraftSelect.trigger('change'); // Select2に通知
         } else {
