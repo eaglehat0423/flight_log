@@ -11,68 +11,197 @@
   <h2>Add Flight Log</h2>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="form-group">
-      <label for="id_date">Date</label>
-      {{ form.date|add_class:"form-control" }}
-    </div>
-    <div class="form-group">
-      <label for="country-select">Departure Country</label>
-      <select id="country-select" class="form-control select2">
-        <option value="">-- Select Country --</option>
-      </select>
-    </div>
+    <div class="card p-3 mb-3 bg-info"> 
+        <div class="row">
+            <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="id_date">Date</label>
+                    {{ form.date|add_class:"form-control" }}
+                    </div>
+            </div>
+            <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="id_airline">Airline</label>
+                    {{ form.airline|add_class:"form-control" }}
+                    </div>
+            </div>
 
-    <div class="form-group">
-      <label for="id_departure">Departure (Airport Code)</label>
-      <select name="departure" id="id_departure" class="form-control select2">
-        <option value="">-- Select Airport --</option>
-      </select>
-    </div>
+            <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="id_flight_number">Flight Number</label>
+                    {{ form.flight_number|add_class:"form-control" }}
+                    </div>
+            </div>
+            <div class="col-md-3">
+                    <div class="form-group">
+                    <label for="id_seat_class">Class</label>
+                    {{ form.seat_class|add_class:"form-control" }}
+                    </div>
+            </div>
+            <div class="col-md-3">
+                    <div class="form-group">
+                    <label for="id_seat_number">Seat Number</label>
+                    {{ form.seat_number|add_class:"form-control" }}
+                    </div>
+            </div>
 
-    <div class="form-group mt-3">
-        <label for="arrival-country-select">Arrival Country</label>
-        <select id="arrival-country-select" class="form-control select2">
-            <option value="">-- Select Country --</option>
-        </select>
-    </div>
+            <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="id_aircraft_type">Aircraft Type</label>
+                    <select name="aircraft_type" id="id_aircraft_type" class="form-control select2">
+                        <option value="">-- Select Aircraft Type --</option>
+                    </select>
+                    </div>
+            </div>
+            <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="id_aircraft_reg">Aircraft Registration</label>
+                    {{ form.aircraft_reg|add_class:"form-control" }}
+                    </div>
+            </div>
+        </div>
+    </div> 
 
-    <div class="form-group">
-        <label for="id_arrival">Arrival (Airport Code)</label>
-        <select name="arrival" id="id_arrival" class="form-control select2">
-            <option value="">-- Select Airport --</option>
-        </select>
-    </div>
+    <div class="card p-3 mb-3 bg-info"> 
+        <div class="row">
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="country-select">Departure Country</label>
+                <select id="country-select" class="form-control select2">
+                <option value="">-- Select Country --</option>
+                </select>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_departure">Departure (Airport Code)</label>
+                <select name="departure" id="id_departure" class="form-control select2">
+                <option value="">-- Select Airport --</option>
+                </select>
+            </div>
+            </div>
 
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="arrival-country-select">Arrival Country</label>
+                <select id="arrival-country-select" class="form-control select2">
+                <option value="">-- Select Country --</option>
+                </select>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_arrival">Arrival (Airport Code)</label>
+                <select name="arrival" id="id_arrival" class="form-control select2">
+                <option value="">-- Select Airport --</option>
+                </select>
+            </div>
+            </div>
 
-    <div class="form-group">
-      <label for="id_aircraft_type">Aircraft Type</label>
-      <select name="aircraft_type" id="id_aircraft_type" class="form-control select2">
-        <option value="">-- Select Aircraft Type --</option>
-      </select>
-    </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_departure_gate">Departure Gate/Spot</label>
+                {{ form.departure_gate|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_arrival_gate">Arrival Gate/Spot</label>
+                {{ form.arrival_gate|add_class:"form-control" }}
+            </div>
+            </div>
 
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_scheduled_departure">Scheduled Departure Time</label>
+                {{ form.scheduled_departure|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_scheduled_arrival">Scheduled Arrival Time</label>
+                {{ form.scheduled_arrival|add_class:"form-control" }}
+            </div>
+            </div>
 
-    <div class="form-group">
-      <label for="id_aircraft_reg">Aircraft Registration</label>
-      {{ form.aircraft_reg|add_class:"form-control" }}
-    </div>
-    <div class="form-group">
-      <label for="id_flight_time">Flight Time</label>
-      {{ form.flight_time|add_class:"form-control" }}
-    </div>
-    <div class="form-group">
-      <label for="id_flight_type">Flight Type</label>
-      {{ form.flight_type|add_class:"form-control" }}
-    </div>
-    <div class="form-group">
-      <label for="id_notes">Notes</label>
-      {{ form.notes|add_class:"form-control" }}
-    </div>
-    <div class="form-group">
-      <label for="id_image">Image</label>
-      {{ form.image|add_class:"form-control" }}
-    </div>
-    <button type="submit" class="btn btn-primary mt-2">Save</button>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_actual_departure">Actual Departure Time</label>
+                {{ form.actual_departure|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_actual_arrival">Actual Arrival Time</label>
+                {{ form.actual_arrival|add_class:"form-control" }}
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_takeoff_time">Takeoff Time</label>
+                {{ form.takeoff_time|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_landing_time">Landing Time</label>
+                {{ form.landing_time|add_class:"form-control" }}
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_takeoff_runway">Takeoff Runway</label>
+                {{ form.takeoff_runway|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_landing_runway">Landing Runway</label>
+                {{ form.landing_runway|add_class:"form-control" }}
+            </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="card p-3 mb-3 bg-info"> 
+        <div class="row">
+            <div class="col-md-4">
+            <div class="form-group">
+                <label for="id_flight_level">Flight Level (ft)</label>
+                {{ form.flight_level|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-4">
+            <div class="form-group">
+                <label for="id_total_time">Total Flight Time</label>
+                {{ form.total_time|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-4">
+            <div class="form-group">
+                <label for="id_flight_miles">Flight Miles</label>
+                {{ form.flight_miles|add_class:"form-control" }}
+            </div>
+            </div>
+
+            <div class="col-12">
+            <div class="form-group">
+                <label for="id_notes">Notes</label>
+                {{ form.notes|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-12">
+            <div class="form-group">
+                <label for="id_image">Image</label>
+                {{ form.image|add_class:"form-control" }}
+            </div>
+            </div>
+        </div>
+    </div> 
+    
+    <button type="submit" class="btn btn-primary mt-3">Save</button>
   </form>
 </div>
 

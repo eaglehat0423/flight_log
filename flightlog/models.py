@@ -10,13 +10,6 @@ class FlightLog(models.Model):
     arrival = models.CharField(max_length=10)
     aircraft_type = models.CharField(max_length=50)
     aircraft_reg = models.CharField(max_length=20, blank=True)
-    flight_time = models.DecimalField(max_digits=5, decimal_places=2)
-
-    flight_type = models.CharField(max_length=10, choices=[
-        ('VFR', 'VFR'),
-        ('IFR', 'IFR'),
-        ('TRAINING', 'Training'),
-    ])
     notes = models.TextField(blank=True)
     image = models.ImageField(upload_to='flight_images/', blank=True, null=True)
 
@@ -40,6 +33,10 @@ class FlightLog(models.Model):
 
     takeoff_runway = models.CharField(max_length=10, blank=True)
     landing_runway = models.CharField(max_length=10, blank=True)
+
+    flight_level = models.IntegerField(null=True, blank=True)
+    total_time = models.DurationField(null=True, blank=True)
+    flight_miles = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.date} | {self.departure} → {self.arrival}"
