@@ -18,10 +18,10 @@ class FlightLogForm(forms.ModelForm):
         }
 
 
-    def save(self, commit=True):
-        instance = super().save(commit=False)
-        if self.user:
-            instance.user = self.user
-        if commit:
-            instance.save()
-        return instance
+    # def save(self, commit=True):
+    #     instance = super().save(commit=False)
+    #     if self.user:
+    #         instance.user = self.user
+    #     if commit:
+    #         instance.save()
+    #     return instance
