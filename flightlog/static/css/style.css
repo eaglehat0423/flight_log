@@ -1,0 +1,43 @@
+.card {
+  color: #333333;
+  background-color: #dddddd;
+  border-radius: 3px;
+  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.4);
+}
+
+.select2-container .select2-selection--single{
+    display: flex;
+    height: 38px; 
+    padding: 6px 12px;
+    justify-content: center;
+    border-color: rgb(206, 212, 218);
+    justify-content: center;
+    align-items: center;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 26px;
+    position: absolute;
+    top: auto;
+    right: 3%;
+    width: 20px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #000000 transparent transparent transparent;
+}
+
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    border-color: transparent transparent #000000 transparent;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__clear {
+    cursor: pointer;
+    float: right;
+    font-weight: bold;
+    height: 26px;
+    margin-right: 20px;
+    padding-right: 0px;
+    position: absolute;
+    right: 6%;
+}

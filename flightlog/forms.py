@@ -6,15 +6,15 @@ class FlightLogForm(forms.ModelForm):
         model = FlightLog
         exclude = ['user']
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'scheduled_departure': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
-            'scheduled_arrival': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
-            'actual_departure': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
-            'actual_arrival': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
-            'takeoff_time': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
-            'landing_time': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
-            'notes': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
-            'total_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
+            'date': forms.DateInput(attrs={'type': 'date'}),
+            'scheduled_departure': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'scheduled_arrival': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'actual_departure': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'actual_arrival': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'takeoff_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'landing_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'notes': forms.Textarea(attrs={'rows': 3}),
+            'total_time': forms.TimeInput(attrs={'type': 'time'}),
         }
 
 

@@ -8,200 +8,200 @@
 
 {% block content %}
 <div class="container mt-4">
-  <h2>Add Flight Log</h2>
+  <h2>フライトログを追加</h2>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="card p-3 mb-3 bg-info"> 
+    <div class="card p-3 mb-4"> 
         <div class="row">
             <div class="col-md-6">
                     <div class="form-group">
-                    <label for="id_date">Date</label>
-                    {{ form.date|add_class:"form-control" }}
+                    <label for="id_date">日付</label>
+                    {{ form.date|add_class:"form-control"}}
                     </div>
             </div>
             <div class="col-md-6">
                     <div class="form-group">
-                    <label for="id_airline">Airline</label>
+                    <label for="id_airline">航空会社</label>
                     {{ form.airline|add_class:"form-control" }}
                     </div>
             </div>
 
             <div class="col-md-6">
                     <div class="form-group">
-                    <label for="id_flight_number">Flight Number</label>
+                    <label for="id_flight_number">便名</label>
                     {{ form.flight_number|add_class:"form-control" }}
                     </div>
             </div>
             <div class="col-md-3">
                     <div class="form-group">
-                    <label for="id_seat_class">Class</label>
+                    <label for="id_seat_class">クラス</label>
                     {{ form.seat_class|add_class:"form-control" }}
                     </div>
             </div>
             <div class="col-md-3">
                     <div class="form-group">
-                    <label for="id_seat_number">Seat Number</label>
+                    <label for="id_seat_number">座席番号</label>
                     {{ form.seat_number|add_class:"form-control" }}
                     </div>
             </div>
 
             <div class="col-md-6">
                     <div class="form-group">
-                    <label for="id_aircraft_type">Aircraft Type</label>
-                    <select name="aircraft_type" id="id_aircraft_type" class="form-control select2">
+                    <label for="id_aircraft_type">機種</label>
+                    <select name="aircraft_type" id="id_aircraft_type" class="form-control select2" data-placeholder="機種を選択">
                         <option value="">-- Select Aircraft Type --</option>
                     </select>
                     </div>
             </div>
             <div class="col-md-6">
                     <div class="form-group">
-                    <label for="id_aircraft_reg">Aircraft Registration</label>
+                    <label for="id_aircraft_reg">機体番号</label>
                     {{ form.aircraft_reg|add_class:"form-control" }}
                     </div>
             </div>
         </div>
     </div> 
 
-    <div class="card p-3 mb-3 bg-info"> 
+    <div class="card p-3 mb-4"> 
         <div class="row">
             <div class="col-md-6">
             <div class="form-group">
-                <label for="country-select">Departure Country</label>
-                <select id="country-select" class="form-control select2">
-                <option value="">-- Select Country --</option>
+                <label for="country-select">出発国</label>
+                <select id="country-select" class="form-control select2" data-placeholder="出発国を選択">
+                <option value="">-- 国を選択してください --</option>
                 </select>
             </div>
             </div>
             <div class="col-md-6">
             <div class="form-group">
-                <label for="id_departure">Departure (Airport Code)</label>
-                <select name="departure" id="id_departure" class="form-control select2">
-                <option value="">-- Select Airport --</option>
-                </select>
-            </div>
-            </div>
-
-            <div class="col-md-6">
-            <div class="form-group">
-                <label for="arrival-country-select">Arrival Country</label>
-                <select id="arrival-country-select" class="form-control select2">
-                <option value="">-- Select Country --</option>
-                </select>
-            </div>
-            </div>
-            <div class="col-md-6">
-            <div class="form-group">
-                <label for="id_arrival">Arrival (Airport Code)</label>
-                <select name="arrival" id="id_arrival" class="form-control select2">
-                <option value="">-- Select Airport --</option>
+                <label for="id_departure">出発空港</label>
+                <select name="departure" id="id_departure" class="form-control select2" data-placeholder="出発空港を選択">
+                <option value="">-- 空港を選択してください --</option>
                 </select>
             </div>
             </div>
 
             <div class="col-md-6">
             <div class="form-group">
-                <label for="id_departure_gate">Departure Gate/Spot</label>
+                <label for="arrival-country-select">到着国</label>
+                <select id="arrival-country-select" class="form-control select2" data-placeholder="到着国を選択">
+                <option value="">-- 国を選択してください --</option>
+                </select>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_arrival">到着空港</label>
+                <select name="arrival" id="id_arrival" class="form-control select2" data-placeholder="到着空港を選択">
+                <option value="">-- 空港を選択してください --</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_departure_gate">出発ゲート/スポット</label>
                 {{ form.departure_gate|add_class:"form-control" }}
             </div>
             </div>
             <div class="col-md-6">
             <div class="form-group">
-                <label for="id_arrival_gate">Arrival Gate/Spot</label>
+                <label for="id_arrival_gate">到着ゲート/スポット</label>
                 {{ form.arrival_gate|add_class:"form-control" }}
             </div>
             </div>
 
             <div class="col-md-6">
             <div class="form-group">
-                <label for="id_scheduled_departure">Scheduled Departure Time</label>
+                <label for="id_scheduled_departure">出発予定時刻（現地）</label>
                 {{ form.scheduled_departure|add_class:"form-control" }}
             </div>
             </div>
             <div class="col-md-6">
             <div class="form-group">
-                <label for="id_scheduled_arrival">Scheduled Arrival Time</label>
+                <label for="id_scheduled_arrival">到着予定時刻（現地）</label>
                 {{ form.scheduled_arrival|add_class:"form-control" }}
             </div>
             </div>
 
             <div class="col-md-6">
             <div class="form-group">
-                <label for="id_actual_departure">Actual Departure Time</label>
+                <label for="id_actual_departure">出発時刻（現地）</label>
                 {{ form.actual_departure|add_class:"form-control" }}
             </div>
             </div>
             <div class="col-md-6">
             <div class="form-group">
-                <label for="id_actual_arrival">Actual Arrival Time</label>
+                <label for="id_actual_arrival">到着時刻（現地）</label>
                 {{ form.actual_arrival|add_class:"form-control" }}
             </div>
             </div>
 
             <div class="col-md-6">
             <div class="form-group">
-                <label for="id_takeoff_time">Takeoff Time</label>
+                <label for="id_takeoff_time">離陸時刻（現地）</label>
                 {{ form.takeoff_time|add_class:"form-control" }}
             </div>
             </div>
             <div class="col-md-6">
             <div class="form-group">
-                <label for="id_landing_time">Landing Time</label>
+                <label for="id_landing_time">着陸時刻（現地）</label>
                 {{ form.landing_time|add_class:"form-control" }}
             </div>
             </div>
 
             <div class="col-md-6">
             <div class="form-group">
-                <label for="id_takeoff_runway">Takeoff Runway</label>
+                <label for="id_takeoff_runway">離陸滑走路</label>
                 {{ form.takeoff_runway|add_class:"form-control" }}
             </div>
             </div>
             <div class="col-md-6">
             <div class="form-group">
-                <label for="id_landing_runway">Landing Runway</label>
+                <label for="id_landing_runway">着陸滑走路</label>
                 {{ form.landing_runway|add_class:"form-control" }}
             </div>
             </div>
         </div>
     </div> 
 
-    <div class="card p-3 mb-3 bg-info"> 
+    <div class="card p-3 mb-4"> 
         <div class="row">
             <div class="col-md-4">
             <div class="form-group">
-                <label for="id_flight_level">Flight Level (ft)</label>
+                <label for="id_flight_level">巡航高度 (ft)</label>
                 {{ form.flight_level|add_class:"form-control" }}
             </div>
             </div>
             <div class="col-md-4">
             <div class="form-group">
-                <label for="id_total_time">Total Flight Time</label>
+                <label for="id_total_time">総飛行時間</label>
                 {{ form.total_time|add_class:"form-control" }}
             </div>
             </div>
             <div class="col-md-4">
             <div class="form-group">
-                <label for="id_flight_miles">Flight Miles</label>
+                <label for="id_flight_miles">マイル</label>
                 {{ form.flight_miles|add_class:"form-control" }}
             </div>
             </div>
 
             <div class="col-12">
             <div class="form-group">
-                <label for="id_notes">Notes</label>
+                <label for="id_notes">メモ</label>
                 {{ form.notes|add_class:"form-control" }}
             </div>
             </div>
             <div class="col-12">
             <div class="form-group">
-                <label for="id_image">Image</label>
+                <label for="id_image">画像</label>
                 {{ form.image|add_class:"form-control" }}
             </div>
             </div>
         </div>
     </div> 
     
-    <button type="submit" class="btn btn-primary mt-3">Save</button>
+    <button type="submit" class="btn btn-primary mt-3">登録</button>
   </form>
 </div>
 
