@@ -66,8 +66,8 @@
         <div class="row">
             <div class="col-md-6">
             <div class="form-group">
-                <label for="country-select">出発国</label>
-                <select id="country-select" class="form-control select2" data-placeholder="出発国を選択">
+                <label for="departure_country_select">出発国</label>
+                <select name="departure_country" id="departure_country_select" class="form-control select2" data-placeholder="出発国を選択">
                 <option value="">-- 国を選択してください --</option>
                 </select>
             </div>
@@ -83,8 +83,8 @@
 
             <div class="col-md-6">
             <div class="form-group">
-                <label for="arrival-country-select">到着国</label>
-                <select id="arrival-country-select" class="form-control select2" data-placeholder="到着国を選択">
+                <label for="arrival_country_select">到着国</label>
+                <select name="arrival_country" id="arrival_country_select" class="form-control select2" data-placeholder="到着国を選択">
                 <option value="">-- 国を選択してください --</option>
                 </select>
             </div>
@@ -215,10 +215,10 @@
     document.addEventListener('DOMContentLoaded', function () {
         const airportData = window.airportData;
 
-        const countrySelect = $('#country-select');
+        const countrySelect = $('#departure_country_select');
         const airportSelect = $('#id_departure');
 
-        const arrivalCountrySelect = $('#arrival-country-select');
+        const arrivalCountrySelect = $('#arrival_country_select');
         const arrivalAirportSelect = $('#id_arrival');
 
         const aircraftSelect = $('#id_aircraft_type');

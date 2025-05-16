@@ -6,7 +6,9 @@ class FlightLog(models.Model):
     date = models.DateField()
 
     # 基本情報
+    departure_country = models.CharField(max_length=100, blank=True)
     departure = models.CharField(max_length=100)
+    arrival_country = models.CharField(max_length=100, blank=True)
     arrival = models.CharField(max_length=100)
     aircraft_type = models.CharField(max_length=50)
     aircraft_reg = models.CharField(max_length=20, blank=True)
