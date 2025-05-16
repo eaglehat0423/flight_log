@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import FlightLog
 from .forms import FlightLogForm
@@ -20,3 +20,22 @@ def add_log(request):
     else:
         form = FlightLogForm()
     return render(request, 'flightlog/add_log.html', {'form': form})
+
+@login_required
+def edit_log(request, pk):
+    log = get_object_or_404(FlightLog, pk=pk, user=request.user)
+    if request.method == 'POST':
+        form = FlightLogForm(request.POST, request.FILES, instance=log)
+        if form.is_valid():
+            form.save()
+            return redirect('log_list')
+    else:
+        form = FlightLogForm(instance=log)
+    return render(request, 'flightlog/edit_log.html', {'form': form})
+
+@login_required
+def delete_logs(request):
+    if request.method == 'POST':
+        ids = request.POST.getlist('selected_logs')
+        FlightLog.objects.filter(id__in=ids, user=request.user).delete()
+    return redirect('log_list')
