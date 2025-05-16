@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>フライトログを編集</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card p-3 mb-4"> 
+        <div class="row">
+            <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="id_date">日付</label>
+                    {{ form.date|add_class:"form-control"}}
+                    </div>
+            </div>
+            <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="id_airline">航空会社</label>
+                    {{ form.airline|add_class:"form-control" }}
+                    </div>
+            </div>
+
+            <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="id_flight_number">便名</label>
+                    {{ form.flight_number|add_class:"form-control" }}
+                    </div>
+            </div>
+            <div class="col-md-3">
+                    <div class="form-group">
+                    <label for="id_seat_class">クラス</label>
+                    {{ form.seat_class|add_class:"form-control" }}
+                    </div>
+            </div>
+            <div class="col-md-3">
+                    <div class="form-group">
+                    <label for="id_seat_number">座席番号</label>
+                    {{ form.seat_number|add_class:"form-control" }}
+                    </div>
+            </div>
+
+            <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="id_aircraft_type">機種</label>
+                    <select name="aircraft_type" id="id_aircraft_type" class="form-control select2" data-placeholder="機種を選択">
+                        <option value="">-- Select Aircraft Type --</option>
+                    </select>
+                    </div>
+            </div>
+            <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="id_aircraft_reg">機体番号</label>
+                    {{ form.aircraft_reg|add_class:"form-control" }}
+                    </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="card p-3 mb-4"> 
+        <div class="row">
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="departure_country_select">出発国</label>
+                <select name="departure_country" id="departure_country_select" class="form-control select2" data-placeholder="出発国を選択">
+                <option value="">-- 国を選択してください --</option>
+                </select>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_departure">出発空港</label>
+                <select name="departure" id="id_departure" class="form-control select2" data-placeholder="出発空港を選択">
+                <option value="">-- 空港を選択してください --</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="arrival_country_select">到着国</label>
+                <select name="arrival_country" id="arrival_country_select" class="form-control select2" data-placeholder="到着国を選択">
+                <option value="">-- 国を選択してください --</option>
+                </select>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_arrival">到着空港</label>
+                <select name="arrival" id="id_arrival" class="form-control select2" data-placeholder="到着空港を選択">
+                <option value="">-- 空港を選択してください --</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_departure_gate">出発ゲート/スポット</label>
+                {{ form.departure_gate|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_arrival_gate">到着ゲート/スポット</label>
+                {{ form.arrival_gate|add_class:"form-control" }}
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_scheduled_departure">出発予定時刻（現地）</label>
+                {{ form.scheduled_departure|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_scheduled_arrival">到着予定時刻（現地）</label>
+                {{ form.scheduled_arrival|add_class:"form-control" }}
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_actual_departure">出発時刻（現地）</label>
+                {{ form.actual_departure|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_actual_arrival">到着時刻（現地）</label>
+                {{ form.actual_arrival|add_class:"form-control" }}
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_takeoff_time">離陸時刻（現地）</label>
+                {{ form.takeoff_time|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_landing_time">着陸時刻（現地）</label>
+                {{ form.landing_time|add_class:"form-control" }}
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_takeoff_runway">離陸滑走路</label>
+                {{ form.takeoff_runway|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="id_landing_runway">着陸滑走路</label>
+                {{ form.landing_runway|add_class:"form-control" }}
+            </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="card p-3 mb-4"> 
+        <div class="row">
+            <div class="col-md-4">
+            <div class="form-group">
+                <label for="id_flight_level">巡航高度 (ft)</label>
+                {{ form.flight_level|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-4">
+            <div class="form-group">
+                <label for="id_total_time">総飛行時間</label>
+                {{ form.total_time|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-md-4">
+            <div class="form-group">
+                <label for="id_flight_miles">マイル</label>
+                {{ form.flight_miles|add_class:"form-control" }}
+            </div>
+            </div>
+
+            <div class="col-12">
+            <div class="form-group">
+                <label for="id_notes">メモ</label>
+                {{ form.notes|add_class:"form-control" }}
+            </div>
+            </div>
+            <div class="col-12">
+            <div class="form-group">
+                <label for="id_image">画像</label>
+                {{ form.image|add_class:"form-control" }}
+            </div>
+            </div>
+        </div>
+    </div> 
+    <!-- 略（フォーム部分はそのままでOK） -->
+
+    <div class="row">
+        <div class="col text-center">
+            <button type="submit" class="btn btn-primary mt-3 mb-3 w-75">保存</button>
+        </div>
+    </div>
+  </form>
+</div>
+
+<script src="{% static 'js/airports.js' %}"></script>
+<script src="{% static 'js/aircraft_types.js' %}"></script>
+
+<!-- 初期値を渡す -->
+<script>
+    const initialData = {
+        departureCountry: "{{ form.instance.departure_country|default_if_none:''|escapejs }}",
+        departureAirport: "{{ form.instance.departure|default_if_none:''|escapejs }}",
+        arrivalCountry: "{{ form.instance.arrival_country|default_if_none:''|escapejs }}",
+        arrivalAirport: "{{ form.instance.arrival|default_if_none:''|escapejs }}",
+        aircraftType: "{{ form.instance.aircraft_type|default_if_none:''|escapejs }}"
+    };
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const airportData = window.airportData;
+
+    const countrySelect = $('#departure_country_select');
+    const airportSelect = $('#id_departure');
+    const arrivalCountrySelect = $('#arrival_country_select');
+    const arrivalAirportSelect = $('#id_arrival');
+    const aircraftSelect = $('#id_aircraft_type');
+
+    $('.select2').select2({
+        width: '100%',
+        placeholder: '-- 選択してください --',
+        allowClear: true
+    });
+
+    // 国リスト生成
+    for (const country in airportData) {
+        const option = new Option(country, country);
+        countrySelect.append(option.cloneNode(true));
+        arrivalCountrySelect.append(option.cloneNode(true));
+    }
+
+    // 機種リスト追加
+    if (window.aircraftTypes) {
+        window.aircraftTypes.forEach(item => {
+            const option = new Option(item.description, item.icao);
+            aircraftSelect.append(option);
+        });
+    }
+
+    // 初期値の設定（出発）
+    if (initialData.departureCountry) {
+        countrySelect.val(initialData.departureCountry).trigger('change');
+        if (airportData[initialData.departureCountry]) {
+            airportData[initialData.departureCountry].forEach(code => {
+                airportSelect.append(new Option(code, code));
+            });
+            airportSelect.val(initialData.departureAirport).trigger('change');
+        }
+    }
+
+    // 初期値の設定（到着）
+    if (initialData.arrivalCountry) {
+        arrivalCountrySelect.val(initialData.arrivalCountry).trigger('change');
+        if (airportData[initialData.arrivalCountry]) {
+            airportData[initialData.arrivalCountry].forEach(code => {
+                arrivalAirportSelect.append(new Option(code, code));
+            });
+            arrivalAirportSelect.val(initialData.arrivalAirport).trigger('change');
+        }
+    }
+
+    // 初期値の設定（機種）
+    if (initialData.aircraftType) {
+        aircraftSelect.val(initialData.aircraftType).trigger('change');
+    }
+
+    // 国変更時：空港リスト更新
+    countrySelect.on('change', function () {
+        const selectedCountry = $(this).val();
+        airportSelect.empty().append(new Option('-- 空港を選択 --', ''));
+        if (airportData[selectedCountry]) {
+            airportData[selectedCountry].forEach(code => {
+                airportSelect.append(new Option(code, code));
+            });
+        }
+        airportSelect.trigger('change');
+    });
+
+    arrivalCountrySelect.on('change', function () {
+        const selectedCountry = $(this).val();
+        arrivalAirportSelect.empty().append(new Option('-- 空港を選択 --', ''));
+        if (airportData[selectedCountry]) {
+            airportData[selectedCountry].forEach(code => {
+                arrivalAirportSelect.append(new Option(code, code));
+            });
+        }
+        arrivalAirportSelect.trigger('change');
+    });
+});
+</script>
+
+{% endblock %}
