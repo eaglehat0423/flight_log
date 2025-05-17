@@ -29,7 +29,7 @@
             </thead>
             <tbody>
               {% for log in logs %}
-              <tr>
+              <tr onclick="location.href='{% url 'flight_log_detail' log.pk %}'" style="cursor: pointer;">
                 <td class="text-center">
                   <input type="checkbox" name="selected_logs" value="{{ log.id }}" class="log-checkbox">
                 </td>

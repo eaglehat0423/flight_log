@@ -39,3 +39,8 @@ def delete_logs(request):
         ids = request.POST.getlist('selected_logs')
         FlightLog.objects.filter(id__in=ids, user=request.user).delete()
     return redirect('log_list')
+
+@login_required
+def flight_log_detail(request, pk):
+    log = get_object_or_404(FlightLog, pk=pk)
+    return render(request, 'flightlog/flight_log_detail.html', {'log': log})

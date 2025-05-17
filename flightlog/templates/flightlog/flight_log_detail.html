@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-3">フライトログ詳細</h2>
+
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">{{ log.date }} | {{ log.departure }} → {{ log.arrival }}</h5>
+      <p class="card-text"><strong>出発国:</strong> {{ log.departure_country }}</p>
+      <p class="card-text"><strong>到着国:</strong> {{ log.arrival_country }}</p>
+      <p class="card-text"><strong>航空会社:</strong> {{ log.airline }}</p>
+      <p class="card-text"><strong>便名:</strong> {{ log.flight_number }}</p>
+      <p class="card-text"><strong>クラス:</strong> {{ log.seat_class }}</p>
+      <p class="card-text"><strong>座席番号:</strong> {{ log.seat_number }}</p>
+    </div>
+  </div>
+
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">飛行機情報</h5>
+      <p class="card-text"><strong>機種:</strong> {{ log.aircraft_type }}</p>
+      <p class="card-text"><strong>機体番号:</strong> {{ log.aircraft_reg }}</p>
+      <p class="card-text"><strong>飛行高度:</strong> {{ log.flight_level }}</p>
+      <p class="card-text"><strong>飛行距離 (マイル):</strong> {{ log.flight_miles }}</p>
+      <p class="card-text"><strong>飛行時間:</strong> {{ log.total_time }}</p>
+    </div>
+  </div>
+
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">出発・到着情報</h5>
+      <p class="card-text"><strong>出発ゲート:</strong> {{ log.departure_gate }}</p>
+      <p class="card-text"><strong>出発スポット:</strong> {{ log.departure_spot }}</p>
+      <p class="card-text"><strong>到着ゲート:</strong> {{ log.arrival_gate }}</p>
+      <p class="card-text"><strong>到着スポット:</strong> {{ log.arrival_spot }}</p>
+      <p class="card-text"><strong>出発予定時刻:</strong> {{ log.scheduled_departure }}</p>
+      <p class="card-text"><strong>到着予定時刻:</strong> {{ log.scheduled_arrival }}</p>
+      <p class="card-text"><strong>実際の出発時刻:</strong> {{ log.actual_departure }}</p>
+      <p class="card-text"><strong>実際の到着時刻:</strong> {{ log.actual_arrival }}</p>
+      <p class="card-text"><strong>離陸時刻:</strong> {{ log.takeoff_time }}</p>
+      <p class="card-text"><strong>着陸時刻:</strong> {{ log.landing_time }}</p>
+      <p class="card-text"><strong>離陸滑走路:</strong> {{ log.takeoff_runway }}</p>
+      <p class="card-text"><strong>着陸滑走路:</strong> {{ log.landing_runway }}</p>
+    </div>
+  </div>
+
+  {% if log.image %}
+    <div class="mb-4 text-center">
+      <img src="{{ log.image.url }}" class="img-fluid rounded shadow-sm" alt="フライト画像">
+    </div>
+  {% endif %}
+
+  {% if log.notes %}
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">メモ</h5>
+        <p class="card-text">{{ log.notes|linebreaksbr }}</p>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="d-flex justify-content-between">
+    <a href="{% url 'edit_log' log.pk %}" class="btn btn-outline-primary">編集</a>
+    <a href="{% url 'log_list' %}" class="btn btn-secondary">一覧に戻る</a>
+  </div>
+</div>
+{% endblock %}
