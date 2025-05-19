@@ -81,9 +81,15 @@
     // 個別チェックボックス
     checkboxes.forEach(cb => {
       cb.addEventListener('change', updateDeleteButtonVisibility);
+
+      // 親のクリックイベントを無効化
+      cb.addEventListener('click', function (event) {
+        event.stopPropagation();
+      });
     });
   });
 </script>
+
 
 
 {% endblock %}

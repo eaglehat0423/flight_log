@@ -1,14 +1,27 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block extrahead %}
+    <link href="{% static 'css/detail.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+    
+
 {% block content %}
 <div class="container mt-4">
   <h2 class="mb-3">フライトログ詳細</h2>
 
   <div class="card mb-4 shadow-sm">
     <div class="card-body">
-      <h5 class="card-title">{{ log.date }} | {{ log.departure }} → {{ log.arrival }}</h5>
-      <p class="card-text"><strong>出発国:</strong> {{ log.departure_country }}</p>
-      <p class="card-text"><strong>到着国:</strong> {{ log.arrival_country }}</p>
+      <h5 class="card-title text-center">{{ log.date|date:"Y-m-d" }}</h5>
+      <h5 class="card-title text-center">{{ log.departure }}({{ log.departure_country }})</h5>
+      <h5 class="card-title airplane-icon text-center">✈︎</h5>
+      <h5 class="card-title text-center">{{ log.arrival }}({{ log.arrival_country }})</h5>
+    </div>
+  </div>
+
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
       <p class="card-text"><strong>航空会社:</strong> {{ log.airline }}</p>
       <p class="card-text"><strong>便名:</strong> {{ log.flight_number }}</p>
       <p class="card-text"><strong>クラス:</strong> {{ log.seat_class }}</p>
@@ -60,7 +73,7 @@
     </div>
   {% endif %}
 
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between mb-3">
     <a href="{% url 'edit_log' log.pk %}" class="btn btn-outline-primary">編集</a>
     <a href="{% url 'log_list' %}" class="btn btn-secondary">一覧に戻る</a>
   </div>
